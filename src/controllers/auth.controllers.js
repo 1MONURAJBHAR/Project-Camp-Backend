@@ -416,7 +416,7 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
 
 //Upload the avatar 
  const uploadAvatar = asyncHandler(async (req, res) => {
-  const userId = req.user._id; // ✅ userId from auth middleware (assuming user is logged in)
+  const userId = req.user._id; // userId from auth middleware (assuming user is logged in)
 
   if (!req.file) {
     throw new ApiError(400, "No avatar file uploaded");
