@@ -1,6 +1,5 @@
 import express from "express"
-//const router = express.Router();
-//**************or directly************** */
+
 import { Router } from "express";
 
 import {
@@ -36,6 +35,4 @@ router
 
 export default router;
 
-   /**Router() → creates a mini Express app for grouping routes.
-   router.use(verifyJWT) → protects all routes in this router by requiring JWT authentication.
-   router.route() → groups multiple HTTP methods for the same route path. */
+

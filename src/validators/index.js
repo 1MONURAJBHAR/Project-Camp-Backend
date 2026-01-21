@@ -2,13 +2,13 @@ import { body } from "express-validator";   //body is method is taking from expr
 import { AvailableUserRole,AvailableTaskStatues } from "../utils/constants.js";
 
 //This will collect the errors from coming request body in an array and return the array of error to the next validator 
-const userRegisterValidator = () => { //notice here there is no "req,res,next" means it will only collect the error and send it to validator
+const userRegisterValidator = () => { 
   return [
     body("email")
       .trim()
       .notEmpty()
-      .withMessage("Email is required")//if there is error in the upper subsequent method then this withMessage will throw error<--common for all.
-      .isEmail()                       //This will check that the email is in the format of email or not
+      .withMessage("Email is required")
+      .isEmail()                      
       .withMessage("Email is invalid"),
     body("username")
       .trim()
@@ -16,7 +16,7 @@ const userRegisterValidator = () => { //notice here there is no "req,res,next" m
       .withMessage("Username is required")
       .isLowercase()
       .withMessage("Username must be in lower case")
-      .isLength({ min: 3 })    //minimum length of the user must be 3
+      .isLength({ min: 3 })    
       .withMessage("Username must be at least 3 characters long"),
     body("password").trim().notEmpty().withMessage("Password is required"),
     body("fullName").optional().trim(),
@@ -157,17 +157,3 @@ export {
   validateContentNote,
 };
 
-
-/**.optional() → skips validation if the field is missing.
-.isString() → ensures it's a string when provided.
-.trim() → removes extra spaces.
-.isLength({ min, max }) → restricts size. 
-
-.optional() → skips validation if not provided.
-.isBoolean() → ensures the value is true/false (or "true"/"false" in request body).
-.toBoolean() → automatically converts string "true"/"false" into actual boolean.*/
-
-/**Why validators help
-Consistency: No empty or meaningless notes stored.
-Better UX: If content is too short/long, user gets a meaningful error.
-Security: Reduces chances of malicious data (e.g., someone sending empty strings or 1-character junk repeatedly). */

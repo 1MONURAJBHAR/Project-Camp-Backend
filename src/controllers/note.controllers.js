@@ -128,38 +128,3 @@ export {
     deleteProjetNote,
 }
 
-
-/**you should not call await ProjectNote.save() after ProjectNote.create().
-Here’s why:
-ProjectNote.create({...})
-Instantiates a new document.
-Runs schema validation.
-Saves it to MongoDB.
-Returns the saved document.
-So after this line:
-
-const note = await ProjectNote.create({
-  project: projectId,
-  createdBy: req.user._id,
-  content,
-});
-
-👉 note is already saved in the database.
-
-When to use .save() then?
-
-If you create a new document with new Model():
-const note = new ProjectNote({
-  project: projectId,
-  createdBy: req.user._id,
-  content,
-});
-await note.save();  // ✅ now you need save()
-
-
-Or if you modify an existing document and want to persist changes:
-
-note.content = "Updated note";
-await note.save();  // ✅ saves changes
-
-✅ In your current controller, using ProjectNote.create() is enough — no extra .save() is needed. */
